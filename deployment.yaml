@@ -1,0 +1,26 @@
+apiVersion: apps/v1  
+kind: Deployment     
+metadata:
+  name: hbolajraf-webapp  
+spec:
+  replicas: 1  # Number of pod replicas to initially deploy
+  selector:
+    matchLabels:  
+      app: hbolajraf-webapp  
+  template:
+    metadata:
+      labels:
+        app: hbolajraf-webapp  
+    spec:
+      containers:
+      - name: hbolajraf-app-container  # Name of the container within the pod
+        image: mcr.microsoft.com/dotnet/samples:aspnetapp  # Container image to deploy
+        ports:
+        - containerPort: 8080  # Port exposed by the container for application traffic
+        resources:
+          requests:
+            memory: "128Mi"     # Minimum memory the container is guaranteed to use
+            cpu: "250m"         # Minimum CPU the container is guaranteed to use
+          limits:
+            memory: "256Mi"     # Maximum memory the container can use before being throttled
+            cpu: "500m"         # Maximum CPU the container can use before being throttled

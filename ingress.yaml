@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1 
+kind: Ingress                     
+metadata:
+  name: hbolajraf-webapp-ingress  # The name of the Ingress resource.
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /  
+spec:
+  rules:
+  - host: hbolajraf-webapp.local  # Defines the hostname to match incoming requests.
+    http:
+      paths:
+      - path: /                   
+        pathType: Prefix          
+        backend:
+          service:
+            name: hbolajraf-webapp-service  # The name of the service to route traffic to.
+            port:
+              number: 80           # The port on which the service is listening.
